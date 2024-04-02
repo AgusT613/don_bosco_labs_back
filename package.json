@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc -w",
+    "build": "tsc -w",
     "dev": "nodemon dist/index.js -p 8080"
   },
   "keywords": [],
