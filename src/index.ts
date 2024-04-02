@@ -1,4 +1,5 @@
 import express, {Request, Response} from "express"
+import { EXPRESS_PORT } from "./config/dotenv.config.js"
 
 const app = express()
 
@@ -9,6 +10,6 @@ app.get("/", (req: Request, res: Response) => {
     })
 })
 
-app.listen(8080, ()=>{
-    console.log("Listening on port 8080:\n\thttp://localhost:8080");
+app.listen(EXPRESS_PORT, ()=>{
+    console.log(`Listening on port ${EXPRESS_PORT}:\n\thttp://localhost:${EXPRESS_PORT}`);
 })
