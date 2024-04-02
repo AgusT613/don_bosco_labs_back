@@ -1,12 +1,17 @@
-import express, {Request, Response} from "express"
-import { EXPRESS_PORT } from "./config/dotenv.config.js"
+import express, { Request, Response } from "express"
+// Import api endpoints
+import { routes } from "./routes.js"
+// Import api router
+import { api } from "./api/index.js"
+// Dotenv config
+import { EXPRESS_PORT } from "./dotenv.config.js"
 
 const app = express()
+app.use(api)
 
-app.get("/", (req: Request, res: Response) => {
+app.get(routes.home, (req: Request, res: Response) => {
     res.json({
-        message: "Servidor Don Bosco Labs",
-        statusCode: res.statusCode
+        message: "Servidor Don Bosco Labs"
     })
 })
 
