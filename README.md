@@ -22,6 +22,8 @@ PG_USER = "your_postgres_user"
 PG_PASSWORD = "your_postgres_password"
 PG_DATABASE = "your_database_name"          # Ex. DonBoscoLabs
 PG_PORT = your_postgres_port                # By default postgres uses 5432 port
+    # Frontend Allowed Origin
+ALLOWED_ORIGIN = "your_frontend_origin_url"
 ```
 
 - Create the database with postgres using `psql` or `pgAdmin`

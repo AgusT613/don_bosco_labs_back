@@ -1,12 +1,18 @@
 import express, { Request, Response } from "express"
+import cors, { CorsOptions } from "cors"
 // Import api endpoints
 import { routes } from "./routes.js"
 // Import api router
 import { api } from "./api/index.js"
 // Dotenv config
-import { EXPRESS_PORT } from "./dotenv.config.js"
+import { ALLOWED_ORIGIN, EXPRESS_PORT } from "./dotenv.config.js"
 
 const app = express()
+const corsOptions: CorsOptions = {
+    origin: ALLOWED_ORIGIN
+}
+
+app.use(cors(corsOptions))
 app.use(api)
 
 app.get(routes.home, (req: Request, res: Response) => {
