@@ -14,3 +14,6 @@ CREATE TABLE IF NOT EXISTS staff (
 );
 
 INSERT INTO staff (email, password) VALUES ('andreszenase@gmail.com', 'andres123456789'), ('mariamartinez@gmail.com', 'maria123456789');
+INSERT INTO staff (email, password) VALUES ('facundomanzana@gmail.com', 'facundo123456789') RETURNING *;
+
+ALTER TABLE staff ADD CONSTRAINT unique_email_adress UNIQUE(email);

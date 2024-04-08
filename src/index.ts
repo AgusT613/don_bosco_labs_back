@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express"
+import express, { Request, Response, urlencoded } from "express"
 import cors, { CorsOptions } from "cors"
 // Import api endpoints
 import { routes } from "./routes.js"
@@ -12,6 +12,8 @@ const corsOptions: CorsOptions = {
     origin: ALLOWED_ORIGIN
 }
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(cors(corsOptions))
 app.use(api)
 
