@@ -55,6 +55,20 @@ export const putStaff = async (req: Request, res: Response) => {
     }
 }
 
-export const deleteStaff = (req: Request, res: Response) => {
-    // Delete
+export const deleteStaff = async (req: Request, res: Response) => {
+    const user_id = req.params.id
+    try {
+        const query = {
+            text: "DELETE FROM staff WHERE user_id=$1 RETURNING *",
+            values: [user_id]
+        }
+        await pool.query(query)
+        return res.json({ message: `User with id ${user_id} was deleted successfully` })
+    } 
+    catch (error: any) {
+        if (error instanceof DatabaseError) {
+            console.error(error);
+            return res.json({message: error})
+        }
+    }
 }

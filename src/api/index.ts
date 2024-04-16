@@ -12,4 +12,4 @@ api.get(routes.api.index, (req: Request, res: Response) => {
 api.get(routes.api.staff, getStaff)
 api.post(routes.api.staff, postStaff)
 api.put(`${routes.api.staff}/:id`, putStaff)
-api.delete(routes.api.staff, deleteStaff)
+api.delete(`${routes.api.staff}/:id`, deleteStaff)
