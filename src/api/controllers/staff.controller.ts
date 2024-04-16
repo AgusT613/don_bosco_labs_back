@@ -33,8 +33,26 @@ export const postStaff = async (req: Request, res: Response) => {
     }
 }
 
-export const putStaff = (req: Request, res: Response) => {
-    // UPDATE
+export const putStaff = async (req: Request, res: Response) => {
+    try {
+        const user_id = req.params.id
+        const { name, surname, address, dni, email, password, entry_date, area_id, job_position_id } = req.body
+        const query = {
+            text: "UPDATE staff SET name=$1, surname=$2, address=$3, dni=$4, email=$5, password=$6, entry_date=$7, area_id=$8, job_position_id=$9 WHERE user_id=$10 RETURNING *",
+            values: [name, surname, address, dni, email, password, entry_date, area_id, job_position_id, user_id]
+        }
+        const response = await pool.query(query)
+        return res.json({
+            message: `User ${name} with id ${user_id} was updated successfully`,
+            data: response.rows[0]
+        })
+    }
+    catch (error: any) {
+        if (error instanceof DatabaseError) {
+            console.error(error);
+            return res.json({message: error})
+        }
+    }
 }
 
 export const deleteStaff = (req: Request, res: Response) => {
