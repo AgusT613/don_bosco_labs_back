@@ -7,6 +7,24 @@ export const getStaff = async (req: Request, res: Response) => {
     res.json(response.rows)
 }
 
+export const getStaffById = async (req: Request, res: Response) => {
+    const user_id = req.params.id
+    try {
+        const query = {
+            text: "SELECT * FROM staff WHERE user_id = $1",
+            values: [user_id]
+        }
+        const response = await pool.query(query)
+        return res.json(response.rows[0] || response.rows)
+    } 
+    catch (error: any) {
+        if (error instanceof DatabaseError) {
+            console.error(error);
+            return res.json({ message: `Failed to get user with id ${user_id}`})
+        }
+    }
+}
+
 export const postStaff = async (req: Request, res: Response) => {
     const { email, password } = req.body
 
