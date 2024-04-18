@@ -26,16 +26,16 @@ export const getStaffById = async (req: Request, res: Response) => {
 }
 
 export const postStaff = async (req: Request, res: Response) => {
-    const { email, password } = req.body
+    const { name, surname, address, dni, email, password, entry_date, area_id, job_position_id } = req.body
 
-    if (!email || !password) {
-        res.status(404).json({message: "$email and $password are required"})
+    if (!name || !surname || !email || !password) {
+        res.status(404).json({message: "$name, $surname, $email, $password are required"})
     }
 
     try {
         const query = {
-            text: "INSERT INTO staff(email, password) VALUES ($1, $2) RETURNING *",
-            values: [email, password]
+            text: "INSERT INTO staff(name, surname, address, dni, email, password, entry_date, area_id, job_position_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *",
+            values: [name, surname, address, dni, email, password, entry_date, area_id, job_position_id]
         }
         const response = await pool.query(query)
         res.json({message: "User created succesfully", data: response.rows[0]})
